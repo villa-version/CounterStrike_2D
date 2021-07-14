@@ -7,6 +7,7 @@ def setup():
     rectMode(CENTER)
     ellipseMode(CENTER)
     imageMode(CENTER)
+    textSize(24)
 
     box_img = loadImage('images/box.jpg')
 
@@ -27,3 +28,7 @@ def draw():
         elif key == ' ':
             main.dir_player('UP')
     # move player
+
+
+def mousePressed():
+    main.build_box()
