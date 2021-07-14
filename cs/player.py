@@ -35,9 +35,7 @@ class Player(Object):
         self.money = item
 
     def buy_box(self):
-        if self.money.score >= Box.cost_box:
-            self.money.score -= Box.cost_box
-        elif self.money.score < Box.cost_box:
+        if self.money.score < Box.cost_box:
             self.money.score = 0
 
     def build_box(self):
@@ -45,13 +43,23 @@ class Player(Object):
             for item in self.boxs:
                 if (mouseX > item.x + item.w/2 and mouseX < item.x + item.w/2*3 and 
                     mouseY > item.y - item.h/2 and mouseY < item.y + item.h/2):
-                    self.boxs.append(Box(item.x + item.w, item.y, 35, 35, 0, 0, '', 0))
+                    self.money.score -= Box.cost_box
+                    self.boxs.append(Box(item.x + item.w, item.y, 35, 35, 0, 0, 0))
                 elif (mouseX > item.x - item.w/2 - item.w and mouseX < item.x - item.w/2 and 
                       mouseY > item.y - item.h/2 and mouseY < item.y + item.h/2):
-                    self.boxs.append(Box(item.x - item.w, item.y, 35, 35, 0, 0, '', 0))
+                    self.money.score -= Box.cost_box
+                    self.boxs.append(Box(item.x - item.w, item.y, 35, 35, 0, 0, 0))
                 elif (mouseX > item.x - item.w/2 and mouseX < item.x + item.w/2 and 
                       mouseY > item.y - item.h/2 - item.h and mouseY < item.y - item.h/2):
-                    self.boxs.append(Box(item.x, item.y - item.h, 35, 35, 0, 0, '', 0))
+                    self.money.score -= Box.cost_box
+                    self.boxs.append(Box(item.x, item.y - item.h, 35, 35, 0, 0, 0))
+
+    def del_box(self):
+        for item in self.boxs[:]:
+            if (mouseX > item.x - item.w/2 and mouseX < item.x + item.w/2 and
+                mouseY > item.y - item.h/2 and mouseY < item.y + item.h/2):
+                self.boxs.remove(item)
+                self.money.score += Box.cost_box
 
     def outline(self):
         for item in self.boxs:

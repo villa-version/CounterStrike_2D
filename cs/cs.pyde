@@ -9,10 +9,8 @@ def setup():
     imageMode(CENTER)
     textSize(24)
 
-    box_img = loadImage('images/box.jpg')
-
     global main
-    main = Main(box_img)
+    main = Main()
 
 def draw():
     background(126,224,232)
@@ -32,3 +30,7 @@ def draw():
 
 def mousePressed():
     main.build_box()
+    main.shoot()
+
+    if mouseButton == RIGHT:
+        main.delete_box()
