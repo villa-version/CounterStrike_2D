@@ -6,9 +6,6 @@ class ObjectMSG():
         self.msg = msg
         self.score = score
 
-    def run(self):
-        self.show()
-
     def show(self):
         fill(0,0,0)
         text(self.msg + str(self.score), self.x, self.y)
